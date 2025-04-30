@@ -14,32 +14,29 @@ const navData: NavItems[] = [
   { name: "Contact", path: "/contact" },
 ];
 
-const navAuthantication: NavItems[] = [
+const navAuth: NavItems[] = [
   { name: "Login", path: "/login" },
   { name: "Signup", path: "/signup" },
 ];
 
 const Navbar: React.FC = () => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-green-700 w-full p-3 relative">
-      <div className="flex justify-between items-center">
-     
-        <h1 className="text-xl font-bold text-white">Logo</h1>
+    <header className="w-full fixed top-0 left-0 z-50 bg-gradient-to-b from-slate-900/80 to-transparent backdrop-blur-sm shadow-md px-6 py-4">
+      <nav className="max-w-7xl mx-auto flex justify-between items-center">
+        {/* Logo */}
+        <h1 className="text-2xl font-bold text-white">FitWorld</h1>
 
-        <button onClick={() => setOpen(!open)} className="md:hidden text-white text-2xl">
-          {open ? <IoMdClose /> : <IoIosMenu />}
-        </button>
-
-        <div className="hidden md:flex flex-1 justify-center gap-6">
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-8">
           {navData.map((item) => (
             <NavLink
               key={item.name}
               to={item.path}
               className={({ isActive }) =>
-                `text-white hover:text-red-200 transition-colors duration-200 ${
-                  isActive ? "underline font-bold" : ""
+                `text-white text-lg hover:text-yellow-400 transition duration-200 ${
+                  isActive ? "font-bold underline underline-offset-4" : ""
                 }`
               }
             >
@@ -47,60 +44,79 @@ const Navbar: React.FC = () => {
             </NavLink>
           ))}
         </div>
-        <div className="hidden md:flex gap-3">
-          {navAuthantication.map((item) => (
+
+        {/* Desktop Auth Buttons */}
+        <div className="hidden md:flex items-center gap-4">
+          {navAuth.map((item) => (
             <NavLink
               key={item.name}
               to={item.path}
               className={({ isActive }) =>
-                `text-white bg-blue-500 px-3 py-1 rounded hover:bg-blue-600 transition-all duration-200 ${
-                  isActive ? "underline font-bold" : ""
-                }`
+                `text-white px-4 py-2 rounded-md text-sm font-medium ${
+                  item.name === "Signup"
+                    ? "bg-yellow-400 hover:bg-yellow-300 text-black"
+                    : "border border-yellow-400 hover:bg-yellow-400 hover:text-black"
+                } ${isActive ? "underline font-semibold" : ""}`
               }
             >
               {item.name}
             </NavLink>
           ))}
         </div>
-      </div>
 
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden text-white text-3xl"
+          aria-label="Toggle Menu"
+        >
+          {open ? <IoMdClose /> : <IoIosMenu />}
+        </button>
+      </nav>
+
+      {/* Mobile Menu */}
       <div
-        className={`md:hidden flex flex-col gap-5 text-xl absolute top-16 right-0 bg-green-800 p-4 w-full z-50 transform transition-all duration-300 ease-in-out ${
-          open ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-4 pointer-events-none"
+        className={`md:hidden absolute top-20 left-0 w-full bg-slate-900 text-white py-6 px-6 transition-all duration-300 ease-in-out ${
+          open ? "block" : "hidden"
         }`}
       >
-        {navData.map((item) => (
-          <NavLink
-            key={item.name}
-            to={item.path}
-            className={({ isActive }) =>
-              `text-white hover:text-red-200 transition-colors duration-200 ${
-                isActive ? "font-bold underline" : ""
-              }`
-            }
-            onClick={() => setOpen(false)}
-          >
-            {item.name}
-          </NavLink>
-        ))}
-        <div className="flex flex-col gap-3 border-t border-white pt-3">
-          {navAuthantication.map((item) => (
+        <div className="flex flex-col gap-4">
+          {navData.map((item) => (
             <NavLink
               key={item.name}
               to={item.path}
+              onClick={() => setOpen(false)}
               className={({ isActive }) =>
-                `text-white bg-blue-500 px-3 py-1 rounded hover:bg-blue-600 transition-all duration-200 ${
-                  isActive ? "underline font-bold" : ""
+                `text-white text-lg hover:text-yellow-400 transition ${
+                  isActive ? "font-bold underline" : ""
                 }`
               }
+            >
+              {item.name}
+            </NavLink>
+          ))}
+        </div>
+
+        <div className="mt-6 border-t border-slate-700 pt-4 flex flex-col gap-3">
+          {navAuth.map((item) => (
+            <NavLink
+              key={item.name}
+              to={item.path}
               onClick={() => setOpen(false)}
+              className={({ isActive }) =>
+                `text-center text-white px-4 py-2 rounded-md text-sm font-medium ${
+                  item.name === "Signup"
+                    ? "bg-yellow-400 hover:bg-yellow-300 text-black"
+                    : "border border-yellow-400 hover:bg-yellow-400 hover:text-black"
+                } ${isActive ? "underline font-semibold" : ""}`
+              }
             >
               {item.name}
             </NavLink>
           ))}
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

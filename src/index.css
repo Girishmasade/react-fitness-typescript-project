@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 body{
-    background: url('./assets/Bg2.jpg');
+    /* background: url('./assets/Bg2.jpg'); */
     color: white
 }
