@@ -5,6 +5,7 @@ import { CgSmartphoneChip } from "react-icons/cg";
 import { MdSportsMartialArts } from "react-icons/md";
 import { RiUserCommunityFill } from "react-icons/ri";
 import GymSlider from "./GymSlider";
+import GymDataPage from "./GymDataPage";
 
 const GymAboutHomePage: React.FC = () => {
   return (
@@ -83,8 +84,9 @@ const GymAboutHomePage: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-full max-w-7xl py-20 bg-gray-500 min-h-screen">
+      <div className="w-full max-w-7xl  bg-gray-500 min-h-screen">
         <GymSlider/>
+        <GymDataPage/>
       </div>
     </div>
   );
